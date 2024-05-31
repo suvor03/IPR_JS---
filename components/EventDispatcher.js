@@ -12,19 +12,19 @@ class EventDispatcher {
     }
 
     detach(event) {
-        if (this.observers[event.name] === false) {
+        if (this.observers[event] === false) {
             return;
         }
 
-        delete this.observers[event.name];
+        delete this.observers[event];
     }
 
     trigger(event, message) {
-        if (this.observers[event.name] === false) {
+        if (this.observers[event] === false) {
             return;
         }
 
-        this.observers[event.name].forEach(observer => {
+        this.observers[event].forEach(observer => {
             observer.observe(message);
         });
     }
