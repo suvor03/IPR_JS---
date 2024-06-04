@@ -1,14 +1,13 @@
-class EventDispatcher {
+export class EventDispatcher {
     constructor() {
         this.observers = {};
     }
 
-    attach(event, observer) {
-        if (this.observers[event.name] === false) {
-            this.observers[event.name] = [];
+    attach(eventType, observer) {
+        if (!this.observers[eventType]) {
+            this.observers[eventType] = [];
         }
-
-        this.observers[event.name].push(observer);
+        this.observers[eventType].push(observer);
     }
 
     detach(event) {
@@ -20,12 +19,10 @@ class EventDispatcher {
     }
 
     trigger(event, message) {
-        if (this.observers[event] === false) {
-            return;
+        if (this.observers[event]) {
+            this.observers[event].forEach(observer => {
+                observer.observe(message);
+            });
         }
-
-        this.observers[event].forEach(observer => {
-            observer.observe(message);
-        });
     }
 }

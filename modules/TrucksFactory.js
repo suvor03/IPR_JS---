@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'https://cdn.skypack.dev/uuid';
+import { Truck } from './Truck.js';
 
 class TrucksFactory {
     constructor(productTypes) {
@@ -22,3 +23,5 @@ class TrucksFactory {
         return trucks;
     }
 }
+
+export { TrucksFactory };

@@ -1,4 +1,6 @@
-class ObserveProcessTruckFail extends ObserverInterface {
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
+export class ObserveProcessTruckFail extends ObserverInterface {
     observe(message) {
         const truck = message.message.item;
         const error = message.message.error;

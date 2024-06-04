@@ -1,3 +1,5 @@
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
 class ObserveConsoleProcessTruckDone extends ObserverInterface {
     observe(message) {
         console.log(`\x1b[32mЗавершена разгрузка грузовика (ID): ${message.message.item.id}\x1b[0m`);
