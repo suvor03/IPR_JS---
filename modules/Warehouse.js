@@ -4,7 +4,7 @@ export class Warehouse {
 
     constructor() {
         if (Warehouse.instance) {
-            throw new Error('Use Warehouse.getInstance() to get the single instance of this class.');
+            throw new Error('Хранилище уже было инициализировано');
         }
         Warehouse.instance = this;
     }
@@ -16,47 +16,37 @@ export class Warehouse {
         return Warehouse.instance;
     }
 
-    clone() {
-        throw new Error('Warehouse cannot be cloned');
-    }
-
     static getSlots() {
         return Object.values(Warehouse.getInstance().slots);
     }
 
     addSlot(slot) {
-        this.slots[slot.type] = slot;
+        this.slots[slot.type.name] = slot;
     }
 
     static loadSlotsOnce(slots = []) {
         const instance = Warehouse.getInstance();
 
-        if (Object.keys(instance.slots).length !== 0) {
-            throw new Error('Slots have already been loaded');
+        if (Object.keys(instance.slots).length > 0) {
+            throw new Error('Товары были загружены ранее');
         }
 
-        slots.forEach(slot => {
-            instance.addSlot(slot);
-        });
+        slots.forEach((slot) => instance.addSlot(slot));
     }
 
     getSlotFreeSpace(type) {
-        if (!this.slots[type]) {
-            return 0;
-        }
-
-        return this.slots[type].freeSpace;
+        return this.slots[type.name] ? this.slots[type.name].freeSpace : 0;
     }
 
     loadSlot(type, capacity) {
-        if (!this.slots[type]) {
-            throw new Error('Slot does not exist');
+        if (!this.slots[type.name]) {
+            throw new Error('Слот отсутствует');
         }
 
-        if (this.slots[type].freeSpace < capacity) {
-            throw new Error(`Capacity ${capacity}. Cannot be loaded. Available: ${this.slots[type].freeSpace}`);
+        if (this.slots[type.name].freeSpace < capacity) {
+            throw new Error(`Объем ${capacity} не может быть загружен. . Доступно: ${this.slots[type.name].freeSpace}`);
         }
 
-        this.slots[type].freeSpace -= capacity;
+        this.slots[type.name].freeSpace -= capacity;
     }
 }

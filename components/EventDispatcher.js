@@ -3,24 +3,23 @@ export class EventDispatcher {
         this.observers = {};
     }
 
-    attach(eventType, observer) {
-        if (!this.observers[eventType]) {
-            this.observers[eventType] = [];
+    attach(event, observer) {
+        if (!this.observers[event]) {
+            this.observers[event] = [];
         }
-        this.observers[eventType].push(observer);
+
+        this.observers[event].push(observer);
     }
 
     detach(event) {
-        if (this.observers[event] === false) {
-            return;
+        if (this.observers[event]) {
+            delete this.observers[event];
         }
-
-        delete this.observers[event];
     }
 
     trigger(event, message) {
         if (this.observers[event]) {
-            this.observers[event].forEach(observer => {
+            this.observers[event].forEach((observer) => {
                 observer.observe(message);
             });
         }
