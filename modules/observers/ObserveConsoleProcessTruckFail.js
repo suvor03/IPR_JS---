@@ -1,3 +1,5 @@
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
 class ObserveConsoleProcessTruckFail extends ObserverInterface {
     observe(message) {
         console.error(`\x1b[31mОшибка при разгрузке грузовика ID: ${message.message.item.id}\x1b[0m`);

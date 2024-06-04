@@ -1,4 +1,4 @@
-class StrategyInterface {
+export class StrategyInterface {
     getProductType() {
         throw new Error('You have to implement the method getProductType!');
     }

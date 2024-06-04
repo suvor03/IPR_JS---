@@ -1,5 +1,7 @@
+import {Warehouse} from "../Warehouse.js";
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
 
-class ObserveGatewayEnd extends ObserverInterface {
+export class ObserveGatewayEnd extends ObserverInterface {
     observe(message) {
         console.log('<br>');
         console.log('Загрузка складов выполнена.<br>Текущее состояния слотов размещения:<br>');

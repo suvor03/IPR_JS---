@@ -1,3 +1,6 @@
+import {Warehouse} from "../Warehouse.js";
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
 class ObserveConsoleGatewayStart extends ObserverInterface {
     observe(message) {
         console.log("\x1b[32mДоступен склад.\x1b[0m");

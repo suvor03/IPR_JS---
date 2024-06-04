@@ -1,4 +1,4 @@
-class Events {
+export class Events {
     static GATEWAY_START = 'GATEWAY_START';
     static PROCESS_TRUCK_START = 'PROCESS_TRUCK_START';
     static PROCESS_TRUCK_DONE = 'PROCESS_TRUCK_DONE';

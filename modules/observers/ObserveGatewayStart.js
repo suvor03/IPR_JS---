@@ -1,4 +1,7 @@
-class ObserveGatewayStart extends ObserverInterface {
+import {Warehouse} from "../Warehouse.js";
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
+export class ObserveGatewayStart extends ObserverInterface {
     observe(message) {
         console.log('Доступен склад.<br>Слоты размещения склада:<br>');
         console.log('<br>');

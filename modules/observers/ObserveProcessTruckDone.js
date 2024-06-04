@@ -1,4 +1,6 @@
-class ObserveProcessTruckDone extends ObserverInterface {
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
+export class ObserveProcessTruckDone extends ObserverInterface {
     observe(message) {
         const truck = message.message.item;
         console.log(`Выполнена разгрузка грузовика: ${truck.id}<br>`);

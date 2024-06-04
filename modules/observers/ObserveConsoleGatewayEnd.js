@@ -1,3 +1,6 @@
+import {Warehouse} from "../Warehouse.js";
+import {ObserverInterface} from "../../contracts/ObserverInterface.js";
+
 class ObserveConsoleGatewayEnd extends ObserverInterface {
     observe(message) {
         console.log('\n');

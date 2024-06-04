@@ -1,4 +1,6 @@
-class SlotsLoadHandler {
+import {Message} from "../components/Message.js";
+
+export class SlotsLoadHandler {
     constructor(eventDispatcher) {
         this.eventDispatcher = eventDispatcher;
         this.modes = {};

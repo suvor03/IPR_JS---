@@ -1,4 +1,8 @@
-class TropicalOilsUnloadStrategy extends StrategyInterface {
+import {ProductTypes} from "../ProductTypes.js";
+import {Warehouse} from "../Warehouse.js";
+import {StrategyInterface} from "../../contracts/StrategyInterface.js";
+
+export class TropicalOilsUnloadStrategy extends StrategyInterface {
     constructor(warehouse = null) {
         super();
         this.storage = warehouse ? warehouse : Warehouse.getInstance();

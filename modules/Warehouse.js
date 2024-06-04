@@ -1,4 +1,4 @@
-class Warehouse {
+export class Warehouse {
     static instance = null;
     slots = {};
 
