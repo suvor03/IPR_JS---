@@ -1,16 +1,27 @@
 import {Warehouse} from "../Warehouse.js";
-import {ObserverInterface} from "../../contracts/ObserverInterface.js";
 
-export class ObserveGatewayEnd extends ObserverInterface {
-    observe(message) {
-        console.log('<br>');
-        console.log('Загрузка складов выполнена.<br>Текущее состояния слотов размещения:<br>');
-        console.log('<br>');
+export class ObserveGatewayEnd {
+    observe() {
+        const container = document.getElementById("message-container");
 
-        Warehouse.getSlots().forEach(slot => {
-            console.log('Груз: ' + slot.type);
-            console.log('Доступный объем: ' + slot.freeSpace + '<br>');
-            console.log('<br>');
+        const messageElement = document.createElement("div");
+        messageElement.innerHTML =
+            `
+              <br>
+              Загрузка складов выполнена.<br>Текущее состояние слотов размещения:<br>
+              <br>
+            `;
+        container.appendChild(messageElement);
+
+        Warehouse.getSlots().forEach((slot) => {
+            const slotElement = document.createElement("div");
+            slotElement.innerHTML =
+                `
+                    Груз: ${slot.type.value}<br>
+                    Доступный объем: ${slot.freeSpace}<br>
+                    <br>
+                `;
+            container.appendChild(slotElement);
         });
     }
 }

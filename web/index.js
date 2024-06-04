@@ -16,22 +16,11 @@ import {Warehouse} from '../modules/Warehouse.js';
 import {TrucksFactory} from '../modules/TrucksFactory.js';
 
 document.getElementById('runButton').addEventListener('click', () => {
-    const shouldLoadSlots = Math.random() > 0.5;
-    const warehouseSlots = [
+    Warehouse.loadSlotsOnce([
         new Slot(ProductTypes.TYPE_TROPICAL_OILS, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
         new Slot(ProductTypes.TYPE_SPICES, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
         new Slot(ProductTypes.TYPE_CHEESE_POWDER, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
-    ];
-
-    if (shouldLoadSlots) {
-        try {
-            Warehouse.loadSlotsOnce(warehouseSlots);
-        } catch (error) {
-            console.error(error);
-        }
-    } else {
-        console.log("Skipping slot loading this time");
-    }
+    ]);
 
     const eventDispatcher = new EventDispatcher();
 
@@ -41,16 +30,16 @@ document.getElementById('runButton').addEventListener('click', () => {
     eventDispatcher.attach(Events.PROCESS_TRUCK_DONE, new ObserveProcessTruckDone());
     eventDispatcher.attach(Events.PROCESS_TRUCK_FAIL, new ObserveProcessTruckFail());
 
-    const trucksFactory = new TrucksFactory(ProductTypes.getAllTypes());
-    const trucks = trucksFactory.createTrucks(Math.floor(Math.random() * (15 - 9 + 1)) + 9);
+
+    const trucks = (new TrucksFactory(Object.values(ProductTypes))).createTrucks(Math.floor(Math.random() * (15 - 9 + 1)) + 9);
 
     const dto = new DTO(trucks);
 
-    const slotsLoadHandler = new SlotsLoadHandler(eventDispatcher);
+    const handler = new SlotsLoadHandler(eventDispatcher);
 
-    slotsLoadHandler.addMode(new CheesePowderUnloadStrategy());
-    slotsLoadHandler.addMode(new SpicesUnloadStrategy());
-    slotsLoadHandler.addMode(new TropicalOilsUnloadStrategy());
+    handler.addMode(new CheesePowderUnloadStrategy());
+    handler.addMode(new SpicesUnloadStrategy());
+    handler.addMode(new TropicalOilsUnloadStrategy());
 
-    slotsLoadHandler.handle(dto);
+    handler.handle(dto);
 });

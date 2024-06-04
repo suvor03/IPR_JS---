@@ -1,10 +1,8 @@
 import {ProductTypes} from "../ProductTypes.js";
 import {Warehouse} from "../Warehouse.js";
-import {StrategyInterface} from "../../contracts/StrategyInterface.js";
 
-export class SpicesUnloadStrategy extends StrategyInterface {
+export class SpicesUnloadStrategy {
     constructor(warehouse = null) {
-        super();
         this.storage = warehouse ? warehouse : Warehouse.getInstance();
     }
 
@@ -16,11 +14,11 @@ export class SpicesUnloadStrategy extends StrategyInterface {
         const slots = this.storage.getSlotFreeSpace(truck.type);
 
         if (slots < truck.capacity) {
-            throw new Error('Not enough free space');
+            throw new Error('Недостаточно свободного места');
         }
 
         if ((slots % truck.capacity) !== 0) {
-            throw new Error('Free space must be a multiple of 25 kg.');
+            throw new Error('Свободный объем должен быть кратным 25 кг.');
         }
 
         this.storage.loadSlot(truck.type, truck.capacity);

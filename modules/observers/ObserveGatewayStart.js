@@ -1,31 +1,47 @@
 import {Warehouse} from "../Warehouse.js";
-import {ObserverInterface} from "../../contracts/ObserverInterface.js";
 
-export class ObserveGatewayStart extends ObserverInterface {
+export class ObserveGatewayStart {
     observe(message) {
-        console.log('Доступен склад.<br>Слоты размещения склада:<br>');
-        console.log('<br>');
+        const container = document.getElementById("message-container");
 
-        Warehouse.getSlots().forEach(slot => {
-            console.log('Тип хранения: ' + slot.type + '<br>');
-            console.log('Доступный объем: ' + slot.freeSpace + ' кг.<br>');
-            console.log('<br>');
+        const messageElement = document.createElement("div");
+        messageElement.innerHTML =
+            `
+              Доступен склад.<br>Слоты размещения склада:<br>
+              <br>
+            `;
+        container.appendChild(messageElement);
+
+        Warehouse.getSlots().forEach((slot) => {
+            const slotElement = document.createElement("div");
+            slotElement.innerHTML =
+                `
+                    Тип хранения: ${slot.type.value}<br>
+                    Доступный объем: ${slot.freeSpace} кг.<br>
+                    <br>
+                `;
+            container.appendChild(slotElement);
         });
 
-        console.log('<br>');
+        messageElement.innerHTML +=
+            `
+              <br>
+              Запуск обработки грузовиков.<br>Всего грузовиков: ${message.message.item.trucks.length}<br>
+              <br>
+              Грузовики:<br>
+              <br>
+            `;
 
-        const trucks = message.message.item.trucks;
-
-        console.log('Запуск обработки грузовиков.<br>Всего грузовиков: ' + trucks.length + '<br>');
-        console.log('<br>');
-        console.log('Грузовики:<br>');
-        console.log('<br>');
-
-        trucks.forEach(truck => {
-            console.log('ID: ' + truck.id + '<br>');
-            console.log('Груз: ' + truck.type + '<br>');
-            console.log('Объем: ' + truck.capacity + ' кг.<br>');
-            console.log('<br>');
+        message.message.item.trucks.forEach((truck) => {
+            const truckElement = document.createElement("div");
+            truckElement.innerHTML =
+                `
+                    ID: ${truck.id}<br>
+                    Груз: ${truck.type.value}<br>
+                    Объем: ${truck.capacity} кг.<br>
+                    <br>
+                `;
+            container.appendChild(truckElement);
         });
     }
 }
