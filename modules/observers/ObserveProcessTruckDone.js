@@ -1,14 +1,9 @@
 export class ObserveProcessTruckDone {
     observe(message) {
-        let container = document.getElementById("message-container");
+        const output = document.getElementById('process-done');
+        let html = `Выполнена разгрузка грузовика: ${message.message.item.id}<br>`;
+        html += `Доставлен груз: ${message.message.item.type.value} в объеме ${message.message.item.capacity} кг.<br><br>`;
 
-        let messageElement = document.createElement("div");
-        messageElement.innerHTML =
-            `
-              Выполнена разгрузка грузовика: ${message.message.item.id}<br>
-              Доставлен груз: ${message.message.item.type.value} в объеме ${message.message.item.capacity} кг.<br>
-              <br>
-            `;
-        container.appendChild(messageElement);
+        output.innerHTML = html;
     }
 }

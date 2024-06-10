@@ -1,14 +1,9 @@
 export class ObserveProcessTruckStart {
     observe(message) {
-        let container = document.getElementById("message-container");
+        const start = document.getElementById('process-start');
+        let html = `Попытка разгрузки грузовика: ${message.message.item.id}<br>`;
+        html += `Груз: ${message.message.item.type.value} в объеме ${message.message.item.capacity} кг.<br><br>`;
 
-        let messageElement = document.createElement("div");
-        messageElement.innerHTML =
-            `
-              Попытка разгрузки грузовика: ${message.message.id}<br>
-              Груз: ${message.message.type} в объеме ${message.message.capacity} кг.<br>
-              <br>
-            `;
-        container.appendChild(messageElement);
+        start.innerHTML = html;
     }
 }

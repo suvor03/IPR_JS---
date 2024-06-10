@@ -1,23 +1,17 @@
 export class Warehouse {
-    static instance = null;
-    slots = {};
-
     constructor() {
-        if (Warehouse.instance) {
-            throw new Error('Хранилище уже было инициализировано');
-        }
-        Warehouse.instance = this;
+        this.slots = {};
     }
 
     static getInstance() {
-        if (!Warehouse.instance) {
-            Warehouse.instance = new Warehouse();
+        if (!this.instance) {
+            this.instance = new Warehouse();
         }
-        return Warehouse.instance;
+        return this.instance;
     }
 
     static getSlots() {
-        return Object.values(Warehouse.getInstance().slots);
+        return this.getInstance().slots;
     }
 
     addSlot(slot) {
@@ -25,11 +19,13 @@ export class Warehouse {
     }
 
     static loadSlotsOnce(slots = []) {
-        let instance = Warehouse.getInstance();
+        let instance = this.getInstance();
 
-        instance.slots = {};
+        if (Object.keys(instance.slots).length !== 0) {
+            throw new Error('Товары загружены ранее');
+        }
 
-        slots.forEach((slot) => instance.addSlot(slot));
+        slots.forEach(slot => instance.addSlot(slot));
     }
 
     getSlotFreeSpace(type) {
@@ -41,10 +37,11 @@ export class Warehouse {
             throw new Error('Слот отсутствует');
         }
 
-        if (this.slots[type.name].freeSpace < capacity) {
-            throw new Error(`Объем ${capacity} не может быть загружен. . Доступно: ${this.slots[type.name].freeSpace}`);
+        let slot = this.slots[type.name];
+        if (slot.freeSpace < capacity) {
+            throw new Error(`Объем ${capacity}. Не может быть загружен. Доступно: ${slot.freeSpace}`);
         }
 
-        this.slots[type.name].freeSpace -= capacity;
+        slot.freeSpace -= capacity;
     }
 }

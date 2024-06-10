@@ -1,9 +1,9 @@
-import {ProductTypes} from "../ProductTypes.js";
+import ProductTypes from "../ProductTypes.js";
 import {Warehouse} from "../Warehouse.js";
 
 export class SpicesUnloadStrategy {
     constructor(warehouse = null) {
-        this.storage = warehouse ? warehouse : Warehouse.getInstance();
+        this.storage = warehouse || Warehouse.getInstance();
     }
 
     getProductType() {

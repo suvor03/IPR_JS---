@@ -3,6 +3,5 @@ export class Truck {
         this.id = id;
         this.type = type;
         this.capacity = capacity;
-        Object.freeze(this);
     }
 }

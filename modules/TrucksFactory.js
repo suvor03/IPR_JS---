@@ -11,15 +11,10 @@ export class TrucksFactory {
 
         let cases = [...this.productTypes];
 
-        do {
-            cases.sort(() => Math.random());
-
-            trucks.push(new Truck(
-                uuidv4(),
-                cases[0],
-                Math.floor(Math.random())
-            ));
-        } while (trucksCount > trucks.length);
+        while (trucksCount > trucks.length) {
+            cases.sort(() => Math.random() - 0.5);
+            trucks.push(new Truck(uuidv4(), cases[0], Math.floor(Math.random() * 100 + 25)));
+        }
 
         return trucks;
     }

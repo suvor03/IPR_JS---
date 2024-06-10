@@ -19,9 +19,7 @@ export class EventDispatcher {
 
     trigger(event, message) {
         if (this.observers[event]) {
-            this.observers[event].forEach((observer) => {
-                observer.observe(message);
-            });
+            this.observers[event].forEach(observer => observer.observe(message));
         }
     }
 }
