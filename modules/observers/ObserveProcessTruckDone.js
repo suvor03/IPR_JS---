@@ -1,8 +1,14 @@
-class ObserveProcessTruckDone extends ObserverInterface {
+export class ObserveProcessTruckDone {
     observe(message) {
-        const truck = message.message.item;
-        console.log(`Выполнена разгрузка грузовика: ${truck.id}<br>`);
-        console.log(`Доставлен груз: ${truck.type} в объеме ${truck.capacity} кг.<br>`);
-        console.log('<br>');
+        let container = document.getElementById("message-container");
+
+        let messageElement = document.createElement("div");
+        messageElement.innerHTML =
+            `
+              Выполнена разгрузка грузовика: ${message.message.item.id}<br>
+              Доставлен груз: ${message.message.item.type.value} в объеме ${message.message.item.capacity} кг.<br>
+              <br>
+            `;
+        container.appendChild(messageElement);
     }
 }

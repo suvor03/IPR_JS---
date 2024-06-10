@@ -1,9 +1,14 @@
-class ObserveProcessTruckFail extends ObserverInterface {
+export class ObserveProcessTruckFail {
     observe(message) {
-        const truck = message.message.item;
-        const error = message.message.error;
-        console.log(`Ошибка при разгрузке грузовика ID: ${truck.id}<br>`);
-        console.log(`Причина: ${error.message}<br>`);
-        console.log('<br>');
+        let container = document.getElementById("message-container");
+
+        let messageElement = document.createElement("div");
+        messageElement.innerHTML =
+            `
+              Ошибка при разгрузке грузовика ID: ${message.message.item.id}<br>
+              Причина: ${message.message.error.message}<br>
+              <br>
+            `;
+        container.appendChild(messageElement);
     }
 }

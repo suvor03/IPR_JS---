@@ -1,6 +1,8 @@
-class TropicalOilsUnloadStrategy extends StrategyInterface {
+import {ProductTypes} from "../ProductTypes.js";
+import {Warehouse} from "../Warehouse.js";
+
+export class TropicalOilsUnloadStrategy {
     constructor(warehouse = null) {
-        super();
         this.storage = warehouse ? warehouse : Warehouse.getInstance();
     }
 
@@ -9,10 +11,10 @@ class TropicalOilsUnloadStrategy extends StrategyInterface {
     }
 
     unload(truck) {
-        const slots = this.storage.getSlotFreeSpace(truck.type);
+        let slots = this.storage.getSlotFreeSpace(truck.type);
 
         if (slots < truck.capacity) {
-            throw new Error('Not enough free space');
+            throw new Error('Недостаточно свободного места');
         }
 
         this.storage.loadSlot(truck.type, truck.capacity);

@@ -1,6 +1,8 @@
-class CheesePowderUnloadStrategy extends StrategyInterface {
+import {ProductTypes} from "../ProductTypes.js";
+import {Warehouse} from "../Warehouse.js";
+
+export class CheesePowderUnloadStrategy {
     constructor(warehouse = null) {
-        super();
         this.storage = warehouse ? warehouse : Warehouse.getInstance();
     }
 
@@ -9,13 +11,13 @@ class CheesePowderUnloadStrategy extends StrategyInterface {
     }
 
     unload(truck) {
-        const slots = this.storage.getSlotFreeSpace(truck.type);
+        let slots = this.storage.getSlotFreeSpace(truck.type);
 
-        const infelicity = Math.ceil(truck.capacity / 25);
-        const weight = truck.capacity + (infelicity * 4);
+        let infelicity = Math.ceil(truck.capacity / 25);
+        let weight = truck.capacity + (infelicity * 4);
 
         if (slots < weight) {
-            throw new Error('Not enough free space');
+            throw new Error('Недостаточно свободного места');
         }
 
         this.storage.loadSlot(truck.type, truck.capacity);

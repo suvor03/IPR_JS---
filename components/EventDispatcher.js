@@ -1,31 +1,27 @@
-class EventDispatcher {
+export class EventDispatcher {
     constructor() {
         this.observers = {};
     }
 
     attach(event, observer) {
-        if (this.observers[event.name] === false) {
-            this.observers[event.name] = [];
+        if (!this.observers[event]) {
+            this.observers[event] = [];
         }
 
-        this.observers[event.name].push(observer);
+        this.observers[event].push(observer);
     }
 
     detach(event) {
-        if (this.observers[event] === false) {
-            return;
+        if (this.observers[event]) {
+            delete this.observers[event];
         }
-
-        delete this.observers[event];
     }
 
     trigger(event, message) {
-        if (this.observers[event] === false) {
-            return;
+        if (this.observers[event]) {
+            this.observers[event].forEach((observer) => {
+                observer.observe(message);
+            });
         }
-
-        this.observers[event].forEach(observer => {
-            observer.observe(message);
-        });
     }
 }

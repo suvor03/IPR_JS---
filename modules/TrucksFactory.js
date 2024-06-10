@@ -1,21 +1,23 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'https://cdn.skypack.dev/uuid';
+import { Truck } from './Truck.js';
 
-class TrucksFactory {
+export class TrucksFactory {
     constructor(productTypes) {
         this.productTypes = productTypes;
     }
 
     createTrucks(trucksCount) {
-        const trucks = [];
-        const cases = [...this.productTypes];
+        let trucks = [];
+
+        let cases = [...this.productTypes];
 
         do {
-            cases.sort(() => Math.random() - 0.5);
+            cases.sort(() => Math.random());
 
             trucks.push(new Truck(
                 uuidv4(),
                 cases[0],
-                Math.floor(Math.random() * (125 - 25 + 1)) + 25
+                Math.floor(Math.random())
             ));
         } while (trucksCount > trucks.length);
 
