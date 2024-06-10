@@ -3,9 +3,11 @@ import {Warehouse} from "../Warehouse.js";
 export class ObserveGatewayEnd {
     observe(message) {
         const end = document.getElementById('end');
+
         let html = 'Загрузка складов выполнена. Текущее состояние слотов размещения:<br><br>';
 
-        const slots = Warehouse.getSlots();
+        let slots = Warehouse.getSlots();
+
         Object.values(slots).forEach(slot => {
             html += `Груз: ${slot.type.value}<br>Доступный объем: ${slot.freeSpace} кг.<br><br>`;
         });

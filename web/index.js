@@ -17,9 +17,9 @@ import {TrucksFactory} from '../modules/TrucksFactory.js';
 
 
 Warehouse.loadSlotsOnce([
-    new Slot(ProductTypes.TYPE_TROPICAL_OILS, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
-    new Slot(ProductTypes.TYPE_SPICES, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
-    new Slot(ProductTypes.TYPE_CHEESE_POWDER, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
+    new Slot(ProductTypes.TYPE_TROPICAL_OILS, Math.floor(Math.random() * (2500)) + 25),
+    new Slot(ProductTypes.TYPE_SPICES, Math.floor(Math.random() * (2500)) + 25),
+    new Slot(ProductTypes.TYPE_CHEESE_POWDER, Math.floor(Math.random() * (2500)) + 25),
 ]);
 
 const eventDispatcher = new EventDispatcher();
@@ -31,7 +31,7 @@ eventDispatcher.attach(Events.PROCESS_TRUCK_DONE, new ObserveProcessTruckDone())
 eventDispatcher.attach(Events.PROCESS_TRUCK_FAIL, new ObserveProcessTruckFail());
 
 const trucksFactory = new TrucksFactory(Object.values(ProductTypes));
-const trucks = trucksFactory.createTrucks(Math.floor(Math.random() * (15 - 9 + 1)) + 9);
+const trucks = trucksFactory.createTrucks(Math.floor(Math.random() * (15)) + 9);
 
 const model = new DTO(trucks);
 

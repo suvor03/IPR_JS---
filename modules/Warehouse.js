@@ -1,4 +1,7 @@
 export class Warehouse {
+    static instance;
+    static slots = {};
+
     constructor() {
         this.slots = {};
     }
@@ -7,6 +10,7 @@ export class Warehouse {
         if (!this.instance) {
             this.instance = new Warehouse();
         }
+
         return this.instance;
     }
 
@@ -38,6 +42,7 @@ export class Warehouse {
         }
 
         let slot = this.slots[type.name];
+
         if (slot.freeSpace < capacity) {
             throw new Error(`Объем ${capacity}. Не может быть загружен. Доступно: ${slot.freeSpace}`);
         }
