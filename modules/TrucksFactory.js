@@ -7,9 +7,9 @@ export class TrucksFactory {
     }
 
     createTrucks(trucksCount) {
-        const trucks = [];
+        let trucks = [];
 
-        const cases = [...this.productTypes];
+        let cases = [...this.productTypes];
 
         do {
             cases.sort(() => Math.random());

@@ -15,14 +15,14 @@ import {SlotsLoadHandler} from '../modules/SlotsLoadHandler.js';
 import {Warehouse} from '../modules/Warehouse.js';
 import {TrucksFactory} from '../modules/TrucksFactory.js';
 
-document.getElementById('runButton').addEventListener('click', () => {
+
     Warehouse.loadSlotsOnce([
         new Slot(ProductTypes.TYPE_TROPICAL_OILS, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
         new Slot(ProductTypes.TYPE_SPICES, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
         new Slot(ProductTypes.TYPE_CHEESE_POWDER, Math.floor(Math.random() * (2500 - 25 + 1)) + 25),
     ]);
 
-    const eventDispatcher = new EventDispatcher();
+    let eventDispatcher = new EventDispatcher();
 
     eventDispatcher.attach(Events.GATEWAY_START, new ObserveGatewayStart());
     eventDispatcher.attach(Events.GATEWAY_DONE, new ObserveGatewayEnd());
@@ -31,15 +31,15 @@ document.getElementById('runButton').addEventListener('click', () => {
     eventDispatcher.attach(Events.PROCESS_TRUCK_FAIL, new ObserveProcessTruckFail());
 
 
-    const trucks = (new TrucksFactory(Object.values(ProductTypes))).createTrucks(Math.floor(Math.random() * (15 - 9 + 1)) + 9);
+    let trucks = (new TrucksFactory(Object.values(ProductTypes))).createTrucks(Math.floor(Math.random() * (15 - 9 + 1)) + 9);
 
-    const dto = new DTO(trucks);
+    let dto = new DTO(trucks);
 
-    const handler = new SlotsLoadHandler(eventDispatcher);
+    let handler = new SlotsLoadHandler(eventDispatcher);
 
     handler.addMode(new CheesePowderUnloadStrategy());
     handler.addMode(new SpicesUnloadStrategy());
     handler.addMode(new TropicalOilsUnloadStrategy());
 
     handler.handle(dto);
-});
+

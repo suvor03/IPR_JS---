@@ -11,7 +11,7 @@ export class TropicalOilsUnloadStrategy {
     }
 
     unload(truck) {
-        const slots = this.storage.getSlotFreeSpace(truck.type);
+        let slots = this.storage.getSlotFreeSpace(truck.type);
 
         if (slots < truck.capacity) {
             throw new Error('Недостаточно свободного места');

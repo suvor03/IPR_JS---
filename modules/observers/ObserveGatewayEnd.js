@@ -2,9 +2,9 @@ import {Warehouse} from "../Warehouse.js";
 
 export class ObserveGatewayEnd {
     observe() {
-        const container = document.getElementById("message-container");
+        let container = document.getElementById("message-container");
 
-        const messageElement = document.createElement("div");
+        let messageElement = document.createElement("div");
         messageElement.innerHTML =
             `
               <br>
@@ -14,7 +14,7 @@ export class ObserveGatewayEnd {
         container.appendChild(messageElement);
 
         Warehouse.getSlots().forEach((slot) => {
-            const slotElement = document.createElement("div");
+            let slotElement = document.createElement("div");
             slotElement.innerHTML =
                 `
                     Груз: ${slot.type.value}<br>

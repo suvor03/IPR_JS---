@@ -25,11 +25,9 @@ export class Warehouse {
     }
 
     static loadSlotsOnce(slots = []) {
-        const instance = Warehouse.getInstance();
+        let instance = Warehouse.getInstance();
 
-        if (Object.keys(instance.slots).length > 0) {
-            throw new Error('Товары были загружены ранее');
-        }
+        instance.slots = {};
 
         slots.forEach((slot) => instance.addSlot(slot));
     }

@@ -1,8 +1,8 @@
 export class ObserveProcessTruckFail {
     observe(message) {
-        const container = document.getElementById("message-container");
+        let container = document.getElementById("message-container");
 
-        const messageElement = document.createElement("div");
+        let messageElement = document.createElement("div");
         messageElement.innerHTML =
             `
               Ошибка при разгрузке грузовика ID: ${message.message.item.id}<br>

@@ -2,9 +2,9 @@ import {Warehouse} from "../Warehouse.js";
 
 export class ObserveGatewayStart {
     observe(message) {
-        const container = document.getElementById("message-container");
+        let container = document.getElementById("message-container");
 
-        const messageElement = document.createElement("div");
+        let messageElement = document.createElement("div");
         messageElement.innerHTML =
             `
               Доступен склад.<br>Слоты размещения склада:<br>
@@ -13,7 +13,7 @@ export class ObserveGatewayStart {
         container.appendChild(messageElement);
 
         Warehouse.getSlots().forEach((slot) => {
-            const slotElement = document.createElement("div");
+            let slotElement = document.createElement("div");
             slotElement.innerHTML =
                 `
                     Тип хранения: ${slot.type.value}<br>
@@ -33,7 +33,7 @@ export class ObserveGatewayStart {
             `;
 
         message.message.item.trucks.forEach((truck) => {
-            const truckElement = document.createElement("div");
+            let truckElement = document.createElement("div");
             truckElement.innerHTML =
                 `
                     ID: ${truck.id}<br>
