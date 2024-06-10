@@ -1,5 +1,7 @@
-export class ProductTypes {
-    static TYPE_TROPICAL_OILS = 'Тропические масла';
-    static TYPE_SPICES = 'Специи';
-    static TYPE_CHEESE_POWDER = 'Сырный порошок';
-}
+const ProductTypes = {
+    TYPE_TROPICAL_OILS: { value: 'Тропические масла' },
+    TYPE_SPICES: { value: 'Специи' },
+    TYPE_CHEESE_POWDER: { value: 'Сырный порошок' },
+};
+
+export default ProductTypes;

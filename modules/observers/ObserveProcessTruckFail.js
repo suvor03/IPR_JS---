@@ -1,14 +1,11 @@
 export class ObserveProcessTruckFail {
     observe(message) {
-        let container = document.getElementById("message-container");
+        const fail = document.getElementById('process-fail');
 
-        let messageElement = document.createElement("div");
-        messageElement.innerHTML =
-            `
-              Ошибка при разгрузке грузовика ID: ${message.message.item.id}<br>
-              Причина: ${message.message.error.message}<br>
-              <br>
-            `;
-        container.appendChild(messageElement);
+        let html = `Ошибка при разгрузке грузовика ID: ${message.message.item.id}<br>`;
+
+        html += `Причина: ${message.message.error.message}<br><br>`;
+
+        fail.innerHTML = html;
     }
 }

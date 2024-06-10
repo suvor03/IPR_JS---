@@ -1,27 +1,17 @@
 import {Warehouse} from "../Warehouse.js";
 
 export class ObserveGatewayEnd {
-    observe() {
-        let container = document.getElementById("message-container");
+    observe(message) {
+        const end = document.getElementById('end');
 
-        let messageElement = document.createElement("div");
-        messageElement.innerHTML =
-            `
-              <br>
-              Загрузка складов выполнена.<br>Текущее состояние слотов размещения:<br>
-              <br>
-            `;
-        container.appendChild(messageElement);
+        let html = 'Загрузка складов выполнена. Текущее состояние слотов размещения:<br><br>';
 
-        Warehouse.getSlots().forEach((slot) => {
-            let slotElement = document.createElement("div");
-            slotElement.innerHTML =
-                `
-                    Груз: ${slot.type.value}<br>
-                    Доступный объем: ${slot.freeSpace}<br>
-                    <br>
-                `;
-            container.appendChild(slotElement);
+        let slots = Warehouse.getSlots();
+
+        Object.values(slots).forEach(slot => {
+            html += `Груз: ${slot.type.value}<br>Доступный объем: ${slot.freeSpace} кг.<br><br>`;
         });
+
+        end.innerHTML = html;
     }
 }
