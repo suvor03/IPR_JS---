@@ -1,6 +1,6 @@
 export class ObserveProcessTruckStart {
     observe(message) {
-        const start = document.getElementById('process-start');
+        let start = document.getElementById('process-start');
 
         let html = `Попытка разгрузки грузовика: ${message.message.item.id}<br>`;
 
