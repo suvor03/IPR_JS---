@@ -3,12 +3,12 @@ export class EventDispatcher {
         this.observers = {};
     }
 
-    attach(event, observer) {
+    attach(event, ...observers) {
         if (!this.observers[event]) {
             this.observers[event] = [];
         }
 
-        this.observers[event].push(observer);
+        this.observers[event].push(...observers);
     }
 
     trigger(event, message) {
