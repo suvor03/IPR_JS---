@@ -2,7 +2,7 @@ import {Warehouse} from "../Warehouse.js";
 
 export class ObserveGatewayEnd {
     observe(message) {
-        const end = document.getElementById('end');
+        let end = document.getElementById('end');
 
         let html = 'Загрузка складов выполнена. Текущее состояние слотов размещения:<br><br>';
 

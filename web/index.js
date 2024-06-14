@@ -14,6 +14,12 @@ import {Slot} from '../modules/Slot.js';
 import {SlotsLoadHandler} from '../modules/SlotsLoadHandler.js';
 import {Warehouse} from '../modules/Warehouse.js';
 import {TrucksFactory} from '../modules/TrucksFactory.js';
+import {ObserveConsoleGatewayEnd} from '../modules/observers/ObserveConsoleGatewayEnd.js';
+import {ObserveConsoleGatewayStart} from '../modules/observers/ObserveConsoleGatewayStart.js';
+import {ObserveConsoleProcessTruckDone} from '../modules/observers/ObserveConsoleProcessTruckDone.js';
+import {ObserveConsoleProcessTruckFail} from '../modules/observers/ObserveConsoleProcessTruckFail.js';
+import {ObserveConsoleProcessTruckStart} from '../modules/observers/ObserveConsoleProcessTruckStart.js';
+
 
 
 Warehouse.loadSlotsOnce([
@@ -24,11 +30,11 @@ Warehouse.loadSlotsOnce([
 
 const eventDispatcher = new EventDispatcher();
 
-eventDispatcher.attach(Events.GATEWAY_START, new ObserveGatewayStart());
-eventDispatcher.attach(Events.GATEWAY_DONE, new ObserveGatewayEnd());
-eventDispatcher.attach(Events.PROCESS_TRUCK_START, new ObserveProcessTruckStart());
-eventDispatcher.attach(Events.PROCESS_TRUCK_DONE, new ObserveProcessTruckDone());
-eventDispatcher.attach(Events.PROCESS_TRUCK_FAIL, new ObserveProcessTruckFail());
+eventDispatcher.attach(Events.GATEWAY_START, new ObserveGatewayStart(), new ObserveConsoleGatewayStart());
+eventDispatcher.attach(Events.GATEWAY_DONE, new ObserveGatewayEnd(), new ObserveConsoleGatewayEnd());
+eventDispatcher.attach(Events.PROCESS_TRUCK_START, new ObserveProcessTruckStart(), new ObserveConsoleProcessTruckStart());
+eventDispatcher.attach(Events.PROCESS_TRUCK_DONE, new ObserveProcessTruckDone(), new ObserveConsoleProcessTruckDone());
+eventDispatcher.attach(Events.PROCESS_TRUCK_FAIL, new ObserveProcessTruckFail(), new ObserveConsoleProcessTruckFail());
 
 const trucksFactory = new TrucksFactory(Object.values(ProductTypes));
 const trucks = trucksFactory.createTrucks(Math.floor(Math.random() * (15)) + 9);
